@@ -3,6 +3,7 @@ package com.example.shoppinglistapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,13 +27,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     }
 
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView productName;
+        private final RelativeLayout item;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.productName);
-
+            this.item = itemView.findViewById(R.id.item);
         }
     }
 

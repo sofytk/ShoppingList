@@ -39,7 +39,7 @@ public class NewItem extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.new_item_button:
+                case R.id.add:
                     finish();
                     break;
                 case R.id.save:
