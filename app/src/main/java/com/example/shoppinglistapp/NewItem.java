@@ -1,22 +1,23 @@
 package com.example.shoppinglistapp;
 
+import static com.example.shoppinglistapp.MyItem.itemList;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.shoppinglistapp.databinding.ActivityNewItemBinding;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class NewItem extends AppCompatActivity {
 
     ActivityNewItemBinding binding;
-    public static final List<MyItem> itemList = new ArrayList<>();
+
     private MyItem item;
 
     @SuppressLint("MissingInflatedId")
@@ -24,6 +25,7 @@ public class NewItem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
+        Log.d("RRRR", "newItem");
 
         binding = ActivityNewItemBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -39,16 +41,15 @@ public class NewItem extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.add:
-                    finish();
-                    break;
                 case R.id.save:
                     item = new MyItem(binding.editProductName.getText().toString());
                     itemList.add(item);
+                    Log.d("RRRR", "item" + item.toString());
                     Intent intent = new Intent(NewItem.this, MainActivity.class);
                     startActivity(intent);
                     break;
             }
+
         }
     }
 }

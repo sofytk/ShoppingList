@@ -1,6 +1,7 @@
 package com.example.shoppinglistapp;
 
-import static com.example.shoppinglistapp.NewItem.itemList;
+
+import static com.example.shoppinglistapp.MyItem.itemList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,12 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.shoppinglistapp.databinding.ActivityMainBinding;
@@ -21,23 +24,23 @@ import com.example.shoppinglistapp.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainBinding binding;
 
 
     private ItemAdapter itemAdapter;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        // setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
-        Intent intent1 = getIntent();
+        itemAdapter = new ItemAdapter(itemList, MainActivity.this);
+        binding.recycler.setAdapter(itemAdapter);
+        binding.recycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
 
         binding.add.setOnClickListener(view -> {
@@ -45,19 +48,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             startActivity(intent);
         });
 
-        binding.recycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        updateList();
 
-        binding.recycler.setAdapter(new ItemAdapter(itemList));
-
+        binding.scan.setOnClickListener(view -> {
+        });
     }
+
+    private void updateList() {
+        //itemAdapter.setArrayMyData(mDBConnector.selectAll());
+        itemAdapter.notifyDataSetChanged();
+    }
+
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.wtf("RRRR", String.valueOf(position));
-        Intent intent1 = new Intent(MainActivity.this, EditProduct.class);
-        intent1.putExtra("name", itemList.get(position).getProductName());
-        intent1.putExtra("pos", position);
-        Log.d("RRRR", "startIntent");
-        Log.d("RRRR", String.valueOf(position));
-        startActivity(intent1);
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.save:
+            case R.id.remove:
+                    finish();
+                break;
+        }
     }
 }

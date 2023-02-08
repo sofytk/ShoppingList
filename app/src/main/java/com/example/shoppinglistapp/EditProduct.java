@@ -1,6 +1,6 @@
 package com.example.shoppinglistapp;
 
-import static com.example.shoppinglistapp.NewItem.itemList;
+import static com.example.shoppinglistapp.MyItem.itemList;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,7 @@ import android.view.View;
 
 import com.example.shoppinglistapp.databinding.ActivityEditProductBinding;
 
-import java.util.zip.Inflater;
-
-public class EditProduct extends AppCompatActivity   {
-
+public class EditProduct extends AppCompatActivity {
     ActivityEditProductBinding binding;
     private int pos;
 
@@ -23,30 +20,25 @@ public class EditProduct extends AppCompatActivity   {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         Intent intent = getIntent();
-        binding.editProductName.setText(intent.getStringExtra("name"));
-        pos = Integer.parseInt(intent.getStringExtra("pos"));
+        binding.editProductName1.setText(intent.getStringExtra("name"));
+        pos = intent.getIntExtra("pos", pos);
+        Log.wtf("RRRR", "editstrart" + pos);
 
-        MyClickListener listener = new MyClickListener();
 
-        binding.save.setOnClickListener(listener);
-    }
-    class MyClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.remove:
-                    itemList.remove(pos);
-                    Log.d("RRRR", "remove");
-                    break;
-                case R.id.save:
-                    itemList.get(pos).setProductName(binding.editProductName.getText().toString());
-                    itemList.notify();
-                    Log.d("RRRR", "edit");
-                    Intent intent = new Intent(EditProduct.this, MainActivity.class);
-                    startActivity(intent);
-                    break;
-            }
-        }
+Intent intent1 = new Intent(EditProduct.this, MainActivity.class);
+        binding.save1.setOnClickListener(view -> {
+            itemList.get(pos).setProductName(binding.editProductName1.getText().toString());
+            Log.d("RRRR", "edit");
+            startActivity(intent1);
+        });
+        binding.remove.setOnClickListener(view -> {
+            Log.d("RRRR", String.valueOf(pos));
+            itemList.remove(pos);
+
+            Log.d("RRRR", "remove" + pos);
+            startActivity(intent1);
+        });
     }
 }

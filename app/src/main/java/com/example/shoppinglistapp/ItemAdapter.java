@@ -1,22 +1,34 @@
 package com.example.shoppinglistapp;
 
+import static androidx.core.content.ContextCompat.startActivity;
+import static com.example.shoppinglistapp.MyItem.itemList;
+
+import android.content.Context;
+import android.content.Intent;
+import android.net.wifi.p2p.WifiP2pManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
 
-    private final List<MyItem> myItems;
+    private final ArrayList<MyItem> myItems;
+    private Context mContext;
 
-    public ItemAdapter(List<MyItem> myItems) {
+
+    public ItemAdapter(ArrayList<MyItem> myItems, Context context) {
         this.myItems = myItems;
+        mContext = context;
     }
 
     @NonNull
@@ -25,7 +37,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_item, parent, false);
         return new MyViewHolder(view);
     }
-
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -37,12 +48,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             productName = itemView.findViewById(R.id.productName);
             this.item = itemView.findViewById(R.id.item);
         }
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.MyViewHolder holder, int position) {
         MyItem item = myItems.get(position);
         holder.productName.setText(item.getProductName());
+        holder.item.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, EditProduct.class);
+            intent.putExtra("name", itemList.get(position).getProductName());
+            intent.putExtra("pos", position);
+            Log.d("RRRR", "startIntent");
+            Log.d("RRRR", String.valueOf(position));
+            mContext.startActivity(intent);
+        });
     }
 
     @Override
