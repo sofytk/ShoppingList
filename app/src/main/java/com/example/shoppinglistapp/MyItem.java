@@ -21,6 +21,7 @@ public class MyItem extends AppCompatActivity{
         this.context = this;
     }
 
+
     public String getProductName() {
         return productName;
     }

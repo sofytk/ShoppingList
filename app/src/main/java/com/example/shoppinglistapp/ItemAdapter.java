@@ -1,23 +1,19 @@
 package com.example.shoppinglistapp;
 
-import static androidx.core.content.ContextCompat.startActivity;
 import static com.example.shoppinglistapp.MyItem.itemList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {

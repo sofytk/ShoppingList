@@ -27,7 +27,7 @@ public class EditProduct extends AppCompatActivity {
         Log.wtf("RRRR", "editstrart" + pos);
 
 
-Intent intent1 = new Intent(EditProduct.this, MainActivity.class);
+        Intent intent1 = new Intent(EditProduct.this, MainActivity.class);
         binding.save1.setOnClickListener(view -> {
             itemList.get(pos).setProductName(binding.editProductName1.getText().toString());
             Log.d("RRRR", "edit");
