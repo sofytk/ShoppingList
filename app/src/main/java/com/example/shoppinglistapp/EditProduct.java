@@ -24,13 +24,13 @@ public class EditProduct extends AppCompatActivity {
 
         Intent intent = getIntent();
         pos = intent.getIntExtra("pos", pos);
-        binding.editProductName1.setText(intent.getStringExtra("name"));
+        binding.editProductName.setText(intent.getStringExtra("name"));
         Log.wtf("RRRR", "editstrart" + pos);
 
 
         Intent intent1 = new Intent(EditProduct.this, MainActivity.class);
-        binding.save1.setOnClickListener(view -> {
-            itemList.get(pos).setProductName(binding.editProductName1.getText().toString());
+        binding.save.setOnClickListener(view -> {
+            itemList.get(pos).setProductName(binding.editProductName.getText().toString());
             Log.d("RRRR", "edit");
             startActivity(intent1);
         });

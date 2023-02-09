@@ -14,7 +14,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
 
@@ -24,6 +27,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int ACTION_IMAGE_CAPTURE_REQUEST_CODE = 1;
     ActivityMainBinding binding;
 
     private ItemAdapter itemAdapter;
@@ -49,7 +53,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         updateList();
 
         binding.scan.setOnClickListener(view -> {
+            Intent photoPickerIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(photoPickerIntent, ACTION_IMAGE_CAPTURE_REQUEST_CODE);
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent image) {
+        super.onActivityResult(requestCode, resultCode, image);
+
+        switch (requestCode) {
+            case ACTION_IMAGE_CAPTURE_REQUEST_CODE:
+                if (resultCode == Activity.RESULT_OK) {
+                    Bitmap photo = (Bitmap) image.getExtras().get("data");
+                    Intent intent = new Intent(MainActivity.this, PhotoActivity.class);
+                    intent.putExtra("photo", photo);
+                    startActivity(intent);
+                    Log.v("RRRR", "Load image");
+                }
+        }
     }
 
 
