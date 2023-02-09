@@ -14,11 +14,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
 
-    private final ArrayList<MyItem> myItems;
+    private ArrayList<MyItem> myItems;
     private Context mContext;
 
 
@@ -53,14 +54,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         holder.productName.setText(item.getProductName());
         holder.item.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, EditProduct.class);
-            intent.putExtra("name", itemList.get(position).getProductName());
+            intent.putExtra("name", item.getProductName());
             intent.putExtra("pos", position);
             Log.d("RRRR", "startIntent");
             Log.d("RRRR", String.valueOf(position));
             mContext.startActivity(intent);
         });
     }
-
     @Override
     public int getItemCount() {
         return myItems.size();

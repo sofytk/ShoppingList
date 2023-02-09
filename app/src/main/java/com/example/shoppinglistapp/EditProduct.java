@@ -14,6 +14,7 @@ import com.example.shoppinglistapp.databinding.ActivityEditProductBinding;
 public class EditProduct extends AppCompatActivity {
     ActivityEditProductBinding binding;
     private int pos;
+    MyItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +23,8 @@ public class EditProduct extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();
-        binding.editProductName1.setText(intent.getStringExtra("name"));
         pos = intent.getIntExtra("pos", pos);
+        binding.editProductName1.setText(intent.getStringExtra("name"));
         Log.wtf("RRRR", "editstrart" + pos);
 
 
@@ -34,9 +35,7 @@ public class EditProduct extends AppCompatActivity {
             startActivity(intent1);
         });
         binding.remove.setOnClickListener(view -> {
-            Log.d("RRRR", String.valueOf(pos));
-            itemList.remove(pos);
-
+           itemList.remove(pos);
             Log.d("RRRR", "remove" + pos);
             startActivity(intent1);
         });
