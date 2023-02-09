@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.example.shoppinglistapp.databinding.ActivityPhotoBinding;
 
-public class PhotoActivity extends AppCompatActivity implements View.OnClickListener {
+public class PhotoActivity extends AppCompatActivity{
 
     ActivityPhotoBinding binding;
     Bitmap photo;
@@ -26,6 +26,11 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
 
         preview();
 
+        binding.canel.setOnClickListener(view ->{
+            Intent intent = new Intent(PhotoActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     private void preview() {
@@ -34,15 +39,5 @@ public class PhotoActivity extends AppCompatActivity implements View.OnClickList
         binding.preview.setImageBitmap(photo);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.canel:
-                Intent intent = new Intent(PhotoActivity.this, MainActivity.class);
-                startActivity(intent);
-            case R.id.recognize:
-        }
-
-    }
 
 }
