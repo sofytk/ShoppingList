@@ -1,6 +1,4 @@
-package com.example.shoppinglistapp;
-
-import static com.example.shoppinglistapp.MyItem.itemList;
+package com.example.shoppinglistapp.foritem;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.Serializable;
+import com.example.shoppinglistapp.activities.EditProduct;
+import com.example.shoppinglistapp.R;
+
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {

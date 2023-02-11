@@ -1,4 +1,4 @@
-package com.example.shoppinglistapp;
+package com.example.shoppinglistapp.foritem;
 
 
 import android.content.Context;

@@ -1,14 +1,10 @@
-package com.example.shoppinglistapp;
+package com.example.shoppinglistapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
 
 import com.example.shoppinglistapp.databinding.ActivityPhotoBinding;
 
